@@ -24,17 +24,13 @@ int main (int argc,char* argv[]){
      //creation date
      char buffer[256];
      get_time(buffer);
-     
-     
-     
-     
-     
-     
-     
+     write_version_param(file_pointer,version_num);
+     write_creator_param(file_pointer,creator);
+     write_creation_date_param (file_pointer,buffer);
+     write_time_scale_param (file_pointer,ts);
+
      fclose(file_pointer);
-
 }
-
 
 void get_time(char buffer[]){
     time_t timer;

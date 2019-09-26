@@ -2,7 +2,7 @@
 
 
 void write_version_param(FILE *stream,float version){
-    fprintf(stream,"#version %f\n",version);
+    fprintf(stream,"#version %2.1f\n",version);
 }
 
 
@@ -15,27 +15,49 @@ void write_creation_date_param(FILE *stream,char timebuf[]){
 }
 
 void write_time_scale_param(FILE *stream, enum TIME_SCALE ts){
-    char tsbuf[4]; 
     switch (ts)
     {
     case PS:
-        tsbuf[4] = "ps";
+        fprintf(stream,"#timeScale %s\n","ps");
+        //tsbuf = "ps";
         break;
     case NS:
-        tsbuf[4] = "ns";
+        fprintf(stream,"#timeScale %s\n","ns");
+        //tsbuf= "ns";
         break;
     case US:
-        tsbuf[4] = "us";
+        fprintf(stream,"#timeScale %s\n","us");
+        //tsbuf = "us";
         break;
     case MS:
-        tsbuf[4] = "ms";
+        fprintf(stream,"#timeScale %s\n","ms");
+        //tsbuf = "ms";
         break;
     case S:
-        tsbuf[4] = "s";
+        fprintf(stream,"#timeScale %s\n","s");
+        //tsbuf = "s";
         break;
     default:
-        tsbuf[4] = "ps";
+        fprintf(stream,"#timeScale %s\n","ps");
+        //tsbuf = "ps";
         break;
     }
-    fprintf(stream,"#timeScale %s\n",tsbuf);
+}
+
+
+
+void write_entity_type(FILE *stream, enum ENTITY_TYPE et, int event_index){
+
+}
+
+void write_entity_table(FILE *stream,char event_name[],int event_index){
+
+}
+
+void write_entity_type_table(FILE *stream, enum ENTITY_TYPE et, char event_name[]){
+
+}
+
+void write_table_header(FILE *stream, enum TABLE_HEADER ent_table){
+    
 }
