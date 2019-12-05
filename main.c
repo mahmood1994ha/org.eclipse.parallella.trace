@@ -6,7 +6,7 @@
 
 void get_time(char buffer[]);
 
-
+/*Entry point of the BTF trace generation program */
 int main (int argc,char* argv[]){
     //initiate file pointer 
     FILE *file_pointer;
