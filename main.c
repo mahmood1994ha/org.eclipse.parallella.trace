@@ -17,6 +17,7 @@ int main (int argc,char* argv[]){
          return EXIT_FAILURE;
      }
      printf("file opened\n");
+
      //define comments
      float version_num = 1.0;
      char creator[] = "parallella_board_16";
