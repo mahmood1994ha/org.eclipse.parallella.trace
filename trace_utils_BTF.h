@@ -1,15 +1,15 @@
+#ifndef TRACE_UTILS_BTF_H_
+#define TRACE_UTILS_BTF_H_
 #include <string.h>
 #include <time.h>
 #include <stdio.h>
 
-
-
 enum TIME_SCALE{
-    PS ,
-    NS,
-    US,
-    MS,
-    S
+    PS , // pico seconds
+    NS, // nano seconds
+    US, // micro seconds
+    MS, // milli seconds
+    S // seconds
 };
 
 enum ENTITY_TYPE{
@@ -27,20 +27,27 @@ enum TABLE_HEADER{
     ENTITY_TYPE_TABLE
 };
 
+/**
+ * Structure to hold BTF Header
+ */
+struct TraceHeader
+{
+	float version;
+	char creator[150];
+	char timebuf[150];
+	char modelfile[150];
+	enum TIME_SCALE timescale;
+	enum ENTITY_TYPE entitytype;
+};
 
-void write_version_param(FILE *stream,float version);
-
-void write_creator_param(FILE *stream,char creator[]);
-
-void write_creation_date_param(FILE *stream,char timebuf[]);
-
+/**
+ * Function to map the selected time scale and to write the same onto the btf file
+ */
 void write_time_scale_param(FILE *stream, enum TIME_SCALE ts);
+/**
+ * Function to write BTF header structure onto the btf file
+ */
+void write_header (FILE *, struct TraceHeader *);
 
-void write_table_header(FILE *stream, enum TABLE_HEADER ent_table);
 
-void write_entity_type(FILE *stream, enum ENTITY_TYPE et, int event_index);
-
-void write_entity_table(FILE *stream,char event_name[],int event_index);
-
-void write_entity_type_table(FILE *stream, enum ENTITY_TYPE et, char event_name[]);
-
+#endif /* TRACE_UTILS_BTF_H_ */

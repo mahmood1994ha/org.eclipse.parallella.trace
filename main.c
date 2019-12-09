@@ -6,30 +6,34 @@
 
 void get_time(char buffer[]);
 
-/*Entry point of the BTF trace generation program */
+
 int main (int argc,char* argv[]){
-    //initiate file pointer 
+    //initiate file pointer
     FILE *file_pointer;
-    //char file_name[] = argv[1];
-    file_pointer = fopen(argv[1],"w");
+    char file_name[150];
+    strcpy(file_name,argv[1]);
+    file_pointer = fopen(file_name,"w");
      if (file_pointer == NULL){
          printf("failed to open file\n");
          return EXIT_FAILURE;
      }
-     printf("file opened\n");
 
+     struct TraceHeader l_traceheader;
+     printf("file opened\n");
      //define comments
      float version_num = 1.0;
      char creator[] = "parallella_board_16";
-     enum TIME_SCALE ts = US;   
+     enum TIME_SCALE ts = US;
      //creation date
      char buffer[256];
      get_time(buffer);
-     write_version_param(file_pointer,version_num);
-     write_creator_param(file_pointer,creator);
-     write_creation_date_param (file_pointer,buffer);
-     write_time_scale_param (file_pointer,ts);
 
+     l_traceheader.version = version_num;
+     strcpy(l_traceheader.creator,creator);
+     l_traceheader.timescale = ts;
+     strcpy(l_traceheader.timebuf,buffer);
+     strcpy(l_traceheader.modelfile,argv[2]);
+     write_header(file_pointer,&l_traceheader);
      fclose(file_pointer);
 }
 

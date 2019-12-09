@@ -1,19 +1,5 @@
 #include "trace_utils_BTF.h"
 
-
-void write_version_param(FILE *stream,float version){
-    fprintf(stream,"#version %2.1f\n",version);
-}
-
-
-void write_creator_param(FILE *stream,char creator[]){
-    fprintf(stream,"#creator %s\n",creator);
-}
-
-void write_creation_date_param(FILE *stream,char timebuf[]){
-    fprintf(stream,"#creationDate %s\n",timebuf);
-}
-
 void write_time_scale_param(FILE *stream, enum TIME_SCALE ts){
     switch (ts)
     {
@@ -45,19 +31,15 @@ void write_time_scale_param(FILE *stream, enum TIME_SCALE ts){
 }
 
 
-
-void write_entity_type(FILE *stream, enum ENTITY_TYPE et, int event_index){
-
-}
-
-void write_entity_table(FILE *stream,char event_name[],int event_index){
-
-}
-
-void write_entity_type_table(FILE *stream, enum ENTITY_TYPE et, char event_name[]){
-
-}
-
-void write_table_header(FILE *stream, enum TABLE_HEADER ent_table){
-    
+void write_header (FILE * stream, struct TraceHeader* l_header)
+{
+	fprintf(stream,"#version %2.1f\n",l_header->version);
+	fflush( stdout );
+	fprintf(stream,"#creator %s\n",l_header->creator);
+	fflush( stdout );
+	fprintf(stream,"#creationDate %s\n",l_header->timebuf);
+	fflush( stdout );
+	fprintf(stream,"#inputFile %s\n",l_header->modelfile);
+	fflush( stdout );
+	write_time_scale_param(stream, l_header->timescale);
 }
